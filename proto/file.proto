@@ -1,0 +1,26 @@
+syntax="proto3";
+
+option go_package = "./proto";
+
+package file_service;
+
+service FileService {
+    // simple RPC
+    rpc GetFileInfo(FileName) returns (FileInfoResponse);
+    // server streaming RPC
+    rpc GetFile(FileName) returns (stream FileResponse);
+}
+
+message FileName{
+    string name=1;
+}
+
+message FileInfoResponse{
+    string name=1;
+    int64 size=2;
+}
+message FileResponse{
+    string name=1;
+    bytes chunk=2;
+}
+
